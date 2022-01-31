@@ -6,5 +6,4 @@ type ProductProps = {
 
 export type CartItemProps = {
   product: ProductProps
-  // addToCart: (product: ProductProps) => void
 }

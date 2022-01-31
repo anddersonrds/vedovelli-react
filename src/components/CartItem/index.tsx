@@ -2,6 +2,8 @@ import { useState } from 'react'
 
 import { CartItemProps } from './types'
 
+import * as S from './styles'
+
 const CartItem = ({ product }: CartItemProps) => {
   const [quantity, setQuantity] = useState(1)
 
@@ -14,23 +16,14 @@ const CartItem = ({ product }: CartItemProps) => {
   }
 
   return (
-    <div data-testid="cart-item" className="flex justify-between mt-6">
-      <div className="flex">
-        <img
-          data-testid="image"
-          className="h-20 w-20 object-cover rounded"
-          alt={product.title}
-          src={product.image}
-        />
-        <div className="mx-3">
-          <h3 className="text-sm text-gray-600">{product.title}</h3>
-          <div className="flex items-center mt-2">
-            <button
-              onClick={handleDecreaseQuantity}
-              className="text-gray-500 focus:outline-none focus:text-gray-600"
-            >
-              <svg
-                className="h-5 w-5"
+    <S.Wrapper data-testid="cart-item">
+      <S.ImageWrapper>
+        <S.Image data-testid="image" alt={product.title} src={product.image} />
+        <S.InforWrapper>
+          <S.Title>{product.title}</S.Title>
+          <S.ButtonsWrapper>
+            <S.Button onClick={handleDecreaseQuantity}>
+              <S.Icon
                 fill="none"
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -39,17 +32,11 @@ const CartItem = ({ product }: CartItemProps) => {
                 stroke="currentColor"
               >
                 <path d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-              </svg>
-            </button>
-            <span data-testid="quantity" className="text-gray-700 mx-2">
-              {quantity}
-            </span>
-            <button
-              onClick={handleIncreaseQuantity}
-              className="text-gray-500 focus:outline-none focus:text-gray-600"
-            >
-              <svg
-                className="h-5 w-5"
+              </S.Icon>
+            </S.Button>
+            <S.Quantity data-testid="quantity">{quantity}</S.Quantity>
+            <S.Button onClick={handleIncreaseQuantity}>
+              <S.Icon
                 fill="none"
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -58,13 +45,13 @@ const CartItem = ({ product }: CartItemProps) => {
                 stroke="currentColor"
               >
                 <path d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-              </svg>
-            </button>
-          </div>
-        </div>
-      </div>
-      <span className="text-gray-600">{product.price}$</span>
-    </div>
+              </S.Icon>
+            </S.Button>
+          </S.ButtonsWrapper>
+        </S.InforWrapper>
+      </S.ImageWrapper>
+      <S.Price>{product.price}$</S.Price>
+    </S.Wrapper>
   )
 }
 
